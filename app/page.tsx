@@ -73,9 +73,10 @@ const preorderForm = () => {
                   <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none dark:text-zinc-50">
                     Digital Creator
                   </h1>
-                  <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-zinc-400">
-                    Our cutting-edge AI assistant is designed to revolutionize the way you create digital Products. Join the waitlist now to
-                    be among the first to experience its transformative capabilities.
+                  <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-zinc-400 z-10">
+                    Digital Creator helps you make online courses and products easily. Our tool makes it 
+                    simple and fun to build what you need. Join the waitlist now to be one of the first
+                     to try it out!
                   </p>
                   <h3 className="font-bold text-xl dark:text-zinc-50">Join our waitlist now</h3>
                 </div>
@@ -101,9 +102,9 @@ const preorderForm = () => {
           </section>
         </main>
         <div className="animate-none">
-          <div className="absolute top-[25vh] left-[25vw] w-80 h-80 bg-zinc-500 rounded-full mix-blend-multiply filter blur-3xl opacity-60 dark:opacity-0 z-0"></div>
-          <div className="absolute top-[55vh] right-[40vw] w-80 h-80 bg-zinc-500 rounded-full mix-blend-multiply filter blur-3xl opacity-90 dark:opacity-0 z-0"></div>
-          <div className="absolute top-[40vh] right-[15vw] w-80 h-80 bg-zinc-500 rounded-full mix-blend-multiply filter blur-3xl opacity-70 dark:opacity-0 z-0"></div>
+          <div className="absolute top-[25vh] left-[25vw] w-80 h-80 bg-zinc-500 rounded-full filter blur-3xl opacity-60 z-0"></div>
+          <div className="absolute top-[55vh] right-[40vw] w-80 h-80 bg-zinc-500 rounded-full filter blur-3xl opacity-90 z-0"></div>
+          <div className="absolute top-[40vh] right-[15vw] w-80 h-80 bg-zinc-500 rounded-full filter blur-3xl opacity-70 z-0"></div>
         </div>
       </div>
       <Footer/>
