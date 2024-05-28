@@ -32,9 +32,14 @@ const preorderForm = () => {
     }
   }
 
+  const sendConfiramtionMail = async () => {
+
+  }
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
     postEmailToApi();
+    sendConfiramtionMail();
   }
 
   const toggleDarkMode = () => {
@@ -43,8 +48,8 @@ const preorderForm = () => {
 
   return (
     <div className={`${darkMode && "dark"}`}>
-      <div className="relativ flex flex-col min-h-[95dvh] animate-fadeIn dark:bg-zinc-900">
-        <header className="px-4 lg:px-6 h-14 flex items-center animate-slideInFromTop">
+      <div className="relativ flex flex-col min-h-screen animate-fadeIn dark:bg-zinc-900">
+        <header className="px-4 lg:px-6 h-14 pt-4 flex items-center animate-slideInFromTop">
           <Link className="flex items-center justify-center" href="/">
             <MountainIcon className="h-6 w-6 dark:text-zinc-50" />
             <p className="sr-only text-slate-950">Digital Creator</p>
@@ -66,7 +71,7 @@ const preorderForm = () => {
           </nav>
         </header>
         <main className="flex-1">
-          <section className="w-full flex items-center justify-center min-h-[90vh] py-12 md:py-24 lg:py-32 xl:py-48">
+          <section className="w-full flex items-center justify-center py-12 md:py-24 lg:py-32 xl:py-48">
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center space-y-4 text-center">
                 <div className="space-y-2 animate-slideInFromBottom">
@@ -106,8 +111,8 @@ const preorderForm = () => {
           <div className="absolute top-[55vh] right-[40vw] w-80 h-80 bg-zinc-500 rounded-full filter blur-3xl opacity-90 z-0"></div>
           <div className="absolute top-[40vh] right-[15vw] w-80 h-80 bg-zinc-500 rounded-full filter blur-3xl opacity-70 z-0"></div>
         </div>
+        <Footer/>
       </div>
-      <Footer/>
     </div>
   )
 }
