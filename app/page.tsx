@@ -6,7 +6,7 @@ import { useState } from "react"
 import {motion} from 'framer-motion'
 import { Footer } from "@/components/component/footer"
 
-const preorderForm = () => {
+const PreorderForm = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [userEmail, setUserEmail] = useState("");
@@ -137,4 +137,4 @@ function MountainIcon(props: any) {
   )
 }
 
-export default preorderForm
+export default PreorderForm
