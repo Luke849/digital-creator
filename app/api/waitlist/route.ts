@@ -30,7 +30,7 @@ async function sendEmail(email: string) {
 const resend = new Resend(process.env.RESEND_API_KEY);
   try {
     const { data, error } = await resend.emails.send({
-      from: 'Digital Creator <onboarding@resend.dev>',
+      from: 'Digital Creator <waitlist@digital-creator.vercel>',
       to: [`${email}`],
       subject: 'Welcome to the Waitlist of Digtial Creator',
       react: EmailTemplate(),
