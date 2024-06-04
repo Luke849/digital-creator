@@ -2,14 +2,27 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
-import { useState } from "react"
-import {motion} from 'framer-motion'
+import { useEffect, useState } from "react"
+import {MotionProps, motion} from 'framer-motion'
 import { Footer } from "@/components/component/footer"
+import { twMerge } from "tailwind-merge"
 
 const PreorderForm = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+
+  useEffect(() => {
+    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    const handleDarkModeChange = (e: any) => {
+      setDarkMode(e.matches);
+    };
+
+    // Set initial state based on the current preference
+    setDarkMode(darkModeMediaQuery.matches);
+  }, []);
+
   const postEmailToApi = async () => {
     try{
       setLoading(true);
@@ -47,7 +60,7 @@ const PreorderForm = () => {
   }
 
   return (
-    <div className={`${darkMode && "dark"}`}>
+    <div className={`${darkMode && "dark"} dark-mode`}>
       <div className="relativ flex flex-col min-h-screen animate-fadeIn dark:bg-zinc-900">
         <header className="px-4 lg:px-6 h-14 pt-4 flex items-center animate-slideInFromTop">
           <Link className="flex items-center justify-center" href="/">
@@ -71,7 +84,7 @@ const PreorderForm = () => {
           </nav>
         </header>
         <main className="flex-1">
-          <section className="absolute top-[50vh] translate-y-[-50%] w-full flex items-center justify-center py-12 md:py-24 lg:py-32 xl:py-48 z-10">
+          <section className="relative top-[50vh] translate-y-[-50%] w-full h-screen flex items-center justify-center z-10">
             <div className="container px-4 md:px-6">
               <div className="flex flex-col items-center space-y-4 text-center">
                 <div className="space-y-2 animate-slideInFromBottom">
@@ -105,11 +118,24 @@ const PreorderForm = () => {
               </div>
             </div>
           </section>
+          <section className="mb-[15vh]">
+            <div className="mx-20 grid grid-cols-12 grid-rows-4 gap-4 text-center h-[60vh] my-10">
+              <Block className="col-span-3"/>
+              <Block className="col-span-4"/>
+              <Block className="col-span-2 row-span-2"/>
+              <Block className="col-span-3"/>
+              <Block className="col-span-7 row-span-3"/>
+              <Block className="col-span-3 row-span-3"/>
+              <Block className="col-span-2 row-span-2"/>
+            </div>
+          </section>
         </main>
         <div className="animate-none">
-          <div className="absolute top-[25vh] left-[25vw] w-80 h-80 bg-zinc-500 rounded-full filter blur-3xl opacity-60 z-0"></div>
-          <div className="absolute top-[55vh] right-[40vw] w-80 h-80 bg-zinc-500 rounded-full filter blur-3xl opacity-90 z-0"></div>
-          <div className="absolute top-[40vh] right-[15vw] w-80 h-80 bg-zinc-500 rounded-full filter blur-3xl opacity-70 z-0"></div>
+          <div className="absolute top-[30vh] left-[30vw] w-60 h-60 bg-zinc-500 rounded-full filter blur-3xl opacity-80 -z-10 dark:z-0"></div>
+          <div className="absolute top-[40vh] right-[15vw] w-80 h-80 bg-zinc-500 rounded-full filter blur-3xl opacity-70 -z-10 dark:z-0"></div>
+          <div className="absolute top-[65vh] left-[35vw] w-80 h-80 bg-zinc-500 rounded-full filter blur-3xl opacity-90 -z-10 dark:z-0"></div>
+          <div className="absolute top-[105vh] left-[15vw] w-80 h-80 bg-zinc-500 rounded-full filter blur-3xl opacity-60 -z-10 dark:z-0"></div>
+          <div className="absolute top-[130vh] right-[10vw] w-80 h-80 bg-zinc-500 rounded-full filter blur-3xl opacity-90 -z-10 dark:z-0"></div>
         </div>
         <Footer/>
       </div>
@@ -117,6 +143,19 @@ const PreorderForm = () => {
   )
 }
 
+type Props = {
+  className?: string,
+} & MotionProps;
+
+
+const Block = ({ className, ...rest }: Props) => {
+  return (
+    <motion.div
+      className={twMerge("col-span-4 rounded-lg border dark:border-zinc-700 border-zinc-300 dark:bg-zinc-800 bg-zinc-200 p-6", className)}
+    {...rest}
+    />
+  )
+}
 
 function MountainIcon(props: any) {
   return (
