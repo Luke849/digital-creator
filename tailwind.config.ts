@@ -18,14 +18,25 @@ const config = {
       },
     },
     extend: {
+      colors: {
+        'primary-blue': '#0047FF',
+      },
+      dropShadow: {
+        "sm-primary": "0 0 2px #0047FF",
+        "md-primary": "0 0 4px #0047FF",
+      },
       boxShadow: {
         "md-white": '0 4px 6px -1px rgb(255 255 255 / 0.1), 0 2px 4px -2px rgb(255 255 255 / 0.1)',
-        'inner-white': 'inset 0 2px 4px 0 rgb(255 255 255 / 0.05)'
+        'inner-white': 'inset 0 2px 4px 0 rgb(255 255 255 / 0.05)',
       },
       keyframes: {
         "fadeIn": {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
+        },
+        "fadeOut": {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
         },
         "slideInFromTop": {
           '0%': { transform: 'translateY(-100%)', opacity: '0' },
@@ -46,6 +57,7 @@ const config = {
       },
       animation: {
         "fadeIn": 'fadeIn 1s ease-in-out',
+        "fadeOut": 'fadeOut 300ms ease-in-out',
         "slideInFromTop": 'slideInFromTop 1s ease-in-out',
         "slideInFromBottom": 'slideInFromBottom 1s ease-in-out',
         "accordion-down": "accordion-down 0.2s ease-out",

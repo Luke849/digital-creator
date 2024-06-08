@@ -53,3 +53,16 @@
   * {
     @apply transition-colors duration-200
   }
+
+  .glassy-box {
+    @apply bg-white bg-opacity-10 border border-white border-opacity-20;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .scroll-link{
+    @apply animate-fadeOut;
+    animation-timeline: view();
+    animation-range-start: 0px;
+    animation-range-end: 99vh;
+  }

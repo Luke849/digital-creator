@@ -11,6 +11,7 @@ const PreorderForm = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [isTop, setIsTop] = useState(true);
 
   useEffect(() => {
     const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -21,6 +22,15 @@ const PreorderForm = () => {
 
     // Set initial state based on the current preference
     setDarkMode(darkModeMediaQuery.matches);
+
+    const handleScroll = () => {
+      setIsTop(window.scrollY < 10);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const postEmailToApi = async () => {
@@ -89,7 +99,7 @@ const PreorderForm = () => {
               <div className="flex flex-col items-center space-y-4 text-center">
                 <div className="space-y-2 animate-slideInFromBottom">
                   <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none dark:text-zinc-50">
-                    Digital Creator
+                    Digital <span className="drop-shadow-sm-primary dark:drop-shadow-md-primary text-primary-blue">Creator</span>
                   </h1>
                   <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-zinc-400 z-10">
                     Digital Creator helps you make online courses and products easily. Our tool makes it 
@@ -117,10 +127,29 @@ const PreorderForm = () => {
                 </div>
               </div>
             </div>
+            {isTop && (
+              <div className="rounded-sm absolute bottom-[75px] animate-bounce">
+                <a href="#bento" className={`scroll-link ${!isTop ? 'animate-fadeOut' : ''}`}>
+                  <svg className="dark:fill-zinc-50 fill-zinc-800 w-[30px]"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
+                </a>
+              </div>
+            )}
           </section>
-          <section className="mb-[15vh]">
-            <div className="mx-20 grid grid-cols-12 grid-rows-4 gap-4 text-center h-[60vh] my-10">
-              <Block className="col-span-3"/>
+          <section className="my-[15vh] z-20 relative" id="bento">
+            <div className="mx-20 grid grid-cols-12 grid-rows-4 gap-4 text-center h-[70vh] my-10 backdrop-blur-sm">
+              <Block className="col-span-3 group">
+                <div className="flex justify-between items-center h-full">
+                  <div className="w-[50%] text-sm text-left">
+                    <h2 className="text-xl font-bold dark:text-zinc-50">Website Copy</h2>
+                    <p className="dark:text-zinc-500">
+                      <span className="dark:text-primary-blue text-primary-blue font-semibold">We</span> generate exciting and tailored content for your digital courses or products.
+                    </p>
+                  </div>
+                  <div className="flex justify-center float-right">
+                    <svg width="2500" height="2500" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" className="h-32 w-32 dark:text-zinc-50 text-zinc-900 group-hover:drop-shadow-md-primary" viewBox="-0.17090198558635983 0.482230148717937 41.14235318283891 40.0339509076386"><text x="-9999" y="-9999">ChatGPT</text><path className="w-32 h-32" d="M37.532 16.87a9.963 9.963 0 0 0-.856-8.184 10.078 10.078 0 0 0-10.855-4.835A9.964 9.964 0 0 0 18.306.5a10.079 10.079 0 0 0-9.614 6.977 9.967 9.967 0 0 0-6.664 4.834 10.08 10.08 0 0 0 1.24 11.817 9.965 9.965 0 0 0 .856 8.185 10.079 10.079 0 0 0 10.855 4.835 9.965 9.965 0 0 0 7.516 3.35 10.078 10.078 0 0 0 9.617-6.981 9.967 9.967 0 0 0 6.663-4.834 10.079 10.079 0 0 0-1.243-11.813zM22.498 37.886a7.474 7.474 0 0 1-4.799-1.735c.061-.033.168-.091.237-.134l7.964-4.6a1.294 1.294 0 0 0 .655-1.134V19.054l3.366 1.944a.12.12 0 0 1 .066.092v9.299a7.505 7.505 0 0 1-7.49 7.496zM6.392 31.006a7.471 7.471 0 0 1-.894-5.023c.06.036.162.099.237.141l7.964 4.6a1.297 1.297 0 0 0 1.308 0l9.724-5.614v3.888a.12.12 0 0 1-.048.103l-8.051 4.649a7.504 7.504 0 0 1-10.24-2.744zM4.297 13.62A7.469 7.469 0 0 1 8.2 10.333c0 .068-.004.19-.004.274v9.201a1.294 1.294 0 0 0 .654 1.132l9.723 5.614-3.366 1.944a.12.12 0 0 1-.114.01L7.04 23.856a7.504 7.504 0 0 1-2.743-10.237zm27.658 6.437l-9.724-5.615 3.367-1.943a.121.121 0 0 1 .113-.01l8.052 4.648a7.498 7.498 0 0 1-1.158 13.528v-9.476a1.293 1.293 0 0 0-.65-1.132zm3.35-5.043c-.059-.037-.162-.099-.236-.141l-7.965-4.6a1.298 1.298 0 0 0-1.308 0l-9.723 5.614v-3.888a.12.12 0 0 1 .048-.103l8.05-4.645a7.497 7.497 0 0 1 11.135 7.763zm-21.063 6.929l-3.367-1.944a.12.12 0 0 1-.065-.092v-9.299a7.497 7.497 0 0 1 12.293-5.756 6.94 6.94 0 0 0-.236.134l-7.965 4.6a1.294 1.294 0 0 0-.654 1.132l-.006 11.225zm1.829-3.943l4.33-2.501 4.332 2.5v5l-4.331 2.5-4.331-2.5V18z" fill="currentColor"/></svg>
+                  </div>
+                </div>
+              </Block>
               <Block className="col-span-4"/>
               <Block className="col-span-2 row-span-2"/>
               <Block className="col-span-3"/>
@@ -131,11 +160,11 @@ const PreorderForm = () => {
           </section>
         </main>
         <div className="animate-none">
-          <div className="absolute top-[30vh] left-[30vw] w-60 h-60 bg-zinc-500 rounded-full filter blur-3xl opacity-80 -z-10 dark:z-0"></div>
-          <div className="absolute top-[40vh] right-[15vw] w-80 h-80 bg-zinc-500 rounded-full filter blur-3xl opacity-70 -z-10 dark:z-0"></div>
-          <div className="absolute top-[65vh] left-[35vw] w-80 h-80 bg-zinc-500 rounded-full filter blur-3xl opacity-90 -z-10 dark:z-0"></div>
-          <div className="absolute top-[105vh] left-[15vw] w-80 h-80 bg-zinc-500 rounded-full filter blur-3xl opacity-60 -z-10 dark:z-0"></div>
-          <div className="absolute top-[130vh] right-[10vw] w-80 h-80 bg-zinc-500 rounded-full filter blur-3xl opacity-90 -z-10 dark:z-0"></div>
+          <div className="absolute top-[30vh] left-[30vw] w-60 h-60 bg-primary-blue rounded-full filter blur-3xl dark:opacity-40 opacity-70 -z-10 dark:z-0"></div>
+          <div className="absolute top-[40vh] right-[15vw] w-80 h-80 bg-primary-blue rounded-full filter blur-3xl dark:opacity-30 opacity-50 -z-10 dark:z-0"></div>
+          <div className="absolute top-[65vh] left-[35vw] w-80 h-80 bg-primary-blue rounded-full filter blur-3xl opacity-60 -z-10 dark:z-0"></div>
+          <div className="absolute top-[105vh] left-[15vw] w-80 h-80 bg-primary-blue rounded-full filter blur-3xl opacity-70 -z-10 dark:z-0"></div>
+          <div className="absolute top-[130vh] right-[10vw] w-80 h-80 bg-primary-blue rounded-full filter blur-3xl opacity-50 -z-10 dark:z-0"></div>
         </div>
         <Footer/>
       </div>
@@ -151,10 +180,13 @@ type Props = {
 const Block = ({ className, ...rest }: Props) => {
   return (
     <motion.div
-      className={twMerge("col-span-4 rounded-lg border dark:border-zinc-700 border-zinc-300 dark:bg-zinc-800 bg-zinc-200 p-6", className)}
-    {...rest}
+      className={twMerge(
+        "col-span-4 rounded-lg border dark:border-zinc-700 border-zinc-300 dark:bg-zinc-800 bg-zinc-200 p-6 backdrop-blur-sm bg-opacity-20 dark:hover:border-zinc-600 hover:border-zinc-400",
+        className
+      )}
+      {...rest}
     />
-  )
+  );
 }
 
 function MountainIcon(props: any) {

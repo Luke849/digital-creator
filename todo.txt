@@ -1,0 +1,21 @@
+todo:
+- just 1 entry pro email
+- success popup
+- more
+-email design
+
+bento:
+1 - Website Copy
+    We generate exciting and tailored content for your digital courses or products.
+
+2 - Layout
+    We designs the perect layouts for your digital products.
+
+3 - Customize
+    Easily customize every page to align with your unique brand.
+
+4 - Multiple Pages
+    Effortlessly build and manage multi-page digital products or courses
+
+5 - Export
+    Export your digital products to Notion or as HTML, CSS, and JS files.

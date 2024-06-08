@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="animate-fadeIn">
+    <html lang="en" className="animate-fadeIn scroll-smooth">
       <body className={`${inter.className}`}>
           {children}
           <SpeedInsights/>
