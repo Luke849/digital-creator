@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      cursor: {
+        'blue': 'url(cursor.png), auto',
+      },
       colors: {
         'primary-blue': '#0047FF',
       },
@@ -27,6 +30,7 @@ const config = {
       },
       boxShadow: {
         "md-white": '0 4px 6px -1px rgb(255 255 255 / 0.1), 0 2px 4px -2px rgb(255 255 255 / 0.1)',
+        "lg-white": '0 6px 8px -1px rgb(255 255 255 / 0.1), 0 4px 6px -2px rgb(255 255 255 / 0.1)',
         'inner-white': 'inset 0 2px 4px 0 rgb(255 255 255 / 0.05)',
       },
       keyframes: {

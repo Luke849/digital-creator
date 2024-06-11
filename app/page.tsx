@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
-import {MotionProps, animate, motion, useAnimation, useInView} from 'framer-motion'
+import {MotionProps, animate, easeInOut, motion, useAnimation, useInView} from 'framer-motion'
 import { Footer } from "@/components/component/footer"
 import { twMerge } from "tailwind-merge"
 
@@ -12,29 +12,61 @@ const PreorderForm = () => {
   const [loading, setLoading] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   const [isTop, setIsTop] = useState(true);
+  const [isLayoutHover, setIsLayoutHover] = useState(false);
   const ref = useRef(null);
-  const isInView = useInView(ref)
+  const layoutRef = useRef<HTMLDivElement>(null);
+  const layout = layoutRef.current;
+  const isInView = useInView(ref, { once: true })
   const mainControls = useAnimation();
+  const layoutControls = useAnimation();
 
   useEffect(() => {
     const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-
     setDarkMode(darkModeMediaQuery.matches);
+    const handleChange = (e: any) => setDarkMode(e.matches);
+    darkModeMediaQuery.addEventListener('change', handleChange);
+    return () => darkModeMediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
+  useEffect(() => {
     const handleScroll = () => {
       setIsTop(window.scrollY < 10);
     };
 
-    if(isInView){
-      mainControls.start("animate")
+    if (isInView) {
+      mainControls.start("animate");
     }
 
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [isInView]);
+  }, [isInView, mainControls]);
+
+  useEffect(() => {
+    const handleMouseEnter = () => setIsLayoutHover(true);
+    const handleMouseLeave = () => setIsLayoutHover(false);
+
+    const layout = layoutRef.current;
+    if (layout) {
+      layout.addEventListener('mouseenter', handleMouseEnter);
+      layout.addEventListener('mouseleave', handleMouseLeave);
+    }
+    return () => {
+      if (layout) {
+        layout.removeEventListener('mouseenter', handleMouseEnter);
+        layout.removeEventListener('mouseleave', handleMouseLeave);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isLayoutHover) {
+      layoutControls.start("animate");
+    } else {
+      layoutControls.start("initial");
+    }
+  }, [isLayoutHover, layoutControls]);
 
   const postEmailToApi = async () => {
     try{
@@ -71,7 +103,6 @@ const PreorderForm = () => {
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   }
-
   return (
     <div className={`${darkMode && "dark"} dark-mode`}>
       <div className="relativ flex flex-col min-h-screen animate-fadeIn dark:bg-zinc-900">
@@ -81,10 +112,10 @@ const PreorderForm = () => {
             <p className="sr-only text-slate-950">Digital Creator</p>
           </Link>
           <nav className="ml-auto flex gap-4 sm:gap-6">
-            <div 
+            <div
             onClick={toggleDarkMode}
             className="flex h-6 w-12 cursor-pointer rounded-full border p-[1px] border-zinc-900 bg-zinc-900 dark:order-zinc-50 dark:bg-zinc-50 justify-start dark:justify-end">
-              <motion.div 
+              <motion.div
                 className="h-5 w-5 rounded-full bg-zinc-50 dark:bg-zinc-900"
                 layout
                 transition={{
@@ -105,7 +136,7 @@ const PreorderForm = () => {
                     Digital <span className="drop-shadow-sm-primary dark:drop-shadow-md-primary text-primary-blue">Creator</span>
                   </h1>
                   <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-zinc-400 z-10">
-                    Digital Creator helps you make online courses and products easily. Our tool makes it 
+                    Digital Creator helps you make online courses and products easily. Our tool makes it
                     simple and fun to build what you need. Join the waitlist now to be one of the first
                      to try it out!
                   </p>
@@ -114,11 +145,11 @@ const PreorderForm = () => {
                 <div className="w-full max-w-md space-y-4">
                   <form className="grid gap-4 mt-10" onSubmit={handleSubmit}>
                     <div className="grid gap-2">
-                    <Input 
-                        id="email" 
-                        placeholder="Email" 
-                        type="email" 
-                        value={userEmail} 
+                    <Input
+                        id="email"
+                        placeholder="Email"
+                        type="email"
+                        value={userEmail}
                         onChange={(e) => setUserEmail(e.target.value)}
                         required
                       />
@@ -142,7 +173,7 @@ const PreorderForm = () => {
             <div ref={ref}>
             <motion.div
             initial="initial"
-            animate="animate"
+            animate={mainControls}
             transition={{
               staggerChildren: 0.1
             }}
@@ -151,7 +182,7 @@ const PreorderForm = () => {
                 <div className="flex justify-between items-center h-full">
                   <div className="w-[50%] text-sm text-left">
                     <h2 className="text-xl font-bold dark:text-zinc-50">Website Copy</h2>
-                    <p className="dark:text-zinc-500">
+                    <p className="text-zinc-500">
                       <span className="dark:text-primary-blue text-primary-blue font-semibold">We</span> generate exciting and tailored content for your digital courses or products.
                     </p>
                   </div>
@@ -161,26 +192,76 @@ const PreorderForm = () => {
                 </div>
               </Block>
               <Block className="col-span-4">
-                <div className="flex justify-between items-center h-full">
+                <div className="flex justify-between items-center h-full" ref={layoutRef}>
                   <div className="w-[30%] text-sm text-left">
                     <h2 className="text-xl font-bold dark:text-zinc-50">Layout</h2>
-                    <p className="dark:text-zinc-500">
+                    <p className="text-zinc-500">
                       <span className="dark:text-primary-blue text-primary-blue font-semibold">We</span> designs the perfect layouts for your digital products.
                     </p>
                   </div>
                   <div className="flex justify-center float-right">
-                    <div className="w-60 h-40 bg-zinc-200 rounded-md p-3">
-                      <div className="flex justify-between">                        
-                        <div className="w-36 h-20 bg-zinc-50 rounded-md"/>
-                        <div className="w-14 h-20 bg-zinc-50 rounded-md"/>
+                    <div className="w-60 h-40 bg-zinc-200 dark:bg-zinc-800 rounded-md p-3">
+                      <div className="flex justify-between">
+                        <motion.div
+                          variants={{
+                            initial: {
+                              y: 0,
+                              x: 0,
+                            },
+                            animate: {
+                              y: 56,
+                              x: 72,
+                            }
+                          }}
+                          transition={{ duration: 0.4 }}
+                          initial="initial"
+                          animate={layoutControls}
+                          className="w-36 h-20 bg-zinc-900 rounded-md"/>
+                        <motion.div
+                          variants={{
+                            initial: {
+                              y: 0,
+                              x: 0,
+                            },
+                            animate: {
+                              y: 56,
+                              x: -160,
+                            }
+                          }}
+                          transition={{ duration: 0.4, delay: 0.01 }}
+                          initial="initial"
+                          animate={layoutControls}
+                          className="w-14 h-20 bg-zinc-900 rounded-md"/>
                       </div>
-                      <div className="w-full h-11 mt-3 bg-zinc-50 rounded-md"></div>
+                      <motion.div
+                        variants={{
+                          initial: {
+                            y: 0,
+                          },
+                          animate: {
+                            y: -92,
+                          }
+                        }}
+                        transition={{ duration: 0.4, delay: 0.01 }}
+                        initial="initial"
+                      animate={layoutControls}
+                        className="w-full h-11 mt-3 bg-zinc-900 rounded-md"></motion.div>
                     </div>
                   </div>
                 </div>
               </Block>
               <Block className="col-span-2 row-span-2"/>
-              <Block className="col-span-3"/>
+              <Block className="col-span-3 cursor-blue">
+                <div className="text-sm text-left w-44">
+                      <h2 className="text-xl font-bold dark:text-zinc-50">Export</h2>
+                      <p className="text-zinc-500">
+                        <span className="dark:text-primary-blue text-primary-blue font-semibold">You</span> can export your digital products to Notion or as HTML, CSS, and JS files.
+                      </p>
+                </div>
+                <div className="absolute min-full bottom-8 left-1/2 -translate-x-1/2">
+                  <Button className="w-36 h-17 font-bold text-xl cursor-blue dark:hover:shadow-lg-white dark:shadow-md-white hover:shadow-lg shadow-md">export</Button>
+                </div>
+              </Block>
               <Block className="col-span-7 row-span-3"/>
               <Block className="col-span-3 row-span-3"/>
               <Block className="col-span-2 row-span-2"/>
@@ -222,7 +303,7 @@ const Block = ({ className, ...rest }: Props) => {
         }
       }}
       className={twMerge(
-        "animate-none col-span-4 rounded-lg border dark:border-zinc-700 border-zinc-300 dark:bg-zinc-800 bg-zinc-200 p-6 backdrop-blur-sm bg-opacity-20 dark:hover:border-zinc-600 hover:border-zinc-400",
+        "animate-none col-span-4 rounded-lg border dark:border-zinc-700 border-zinc-300 dark:bg-zinc-800 bg-zinc-200 p-6 backdrop-blur-sm bg-opacity-20 dark:bg-opacity-60 dark:hover:border-zinc-600 hover:border-zinc-400",
         className
       )}
       {...rest}
