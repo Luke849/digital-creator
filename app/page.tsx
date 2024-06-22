@@ -176,7 +176,7 @@ const PreorderForm = () => {
             transition={{
               staggerChildren: 0.1
             }}
-            className="mx-20 grid grid-cols-12 grid-rows-4 gap-4 text-center h-[70vh] my-10 backdrop-blur-sm">
+            className="mx-20 pt-20 grid grid-cols-12 grid-rows-4 gap-4 text-center lg:h-[80vh] my-10 backdrop-blur-sm">
               <Block className="col-span-3 group">
                 <div className="flex justify-between items-center h-full">
                   <div className="w-[50%] text-sm text-left">
@@ -215,7 +215,7 @@ const PreorderForm = () => {
                           transition={{ duration: 0.4 }}
                           initial="initial"
                           animate={layoutControls}
-                          className="w-36 h-20 bg-zinc-900 rounded-md"/>
+                          className="w-36 h-20 bg-zinc-50 dark:bg-zinc-900 rounded-md"/>
                         <motion.div
                           variants={{
                             initial: {
@@ -230,7 +230,7 @@ const PreorderForm = () => {
                           transition={{ duration: 0.4, delay: 0.01 }}
                           initial="initial"
                           animate={layoutControls}
-                          className="w-14 h-20 bg-zinc-900 rounded-md"/>
+                          className="w-14 h-20 bg-zinc-50 dark:bg-zinc-900 rounded-md"/>
                       </div>
                       <motion.div
                         variants={{
