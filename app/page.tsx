@@ -15,7 +15,6 @@ const PreorderForm = () => {
   const [isLayoutHover, setIsLayoutHover] = useState(false);
   const ref = useRef(null);
   const layoutRef = useRef<HTMLDivElement>(null);
-  const layout = layoutRef.current;
   const isInView = useInView(ref, { once: true })
   const mainControls = useAnimation();
   const layoutControls = useAnimation();
@@ -183,11 +182,11 @@ const PreorderForm = () => {
                   <div className="w-[50%] text-sm text-left">
                     <h2 className="text-xl font-bold dark:text-zinc-50">Website Copy</h2>
                     <p className="text-zinc-500">
-                      <span className="dark:text-primary-blue text-primary-blue font-semibold">We</span> generate exciting and tailored content for your digital courses or products.
+                      <span className="dark:text-primary-blue text-primary-blue font-semibold">We</span> generate exciting and tailored content for your digital products.
                     </p>
                   </div>
                   <div className="flex justify-center float-right">
-                    <svg width="2500" height="2500" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" className="h-32 w-32 dark:text-zinc-50 text-zinc-900 group-hover:drop-shadow-md-primary group-hover:stroke-primary-blue stroke-1 group-hover:animate-fadeIn animate-fadeOut" viewBox="-0.17090198558635983 0.482230148717937 41.14235318283891 40.0339509076386"><text x="-9999" y="-9999">ChatGPT</text><path className="w-32 h-32" d="M37.532 16.87a9.963 9.963 0 0 0-.856-8.184 10.078 10.078 0 0 0-10.855-4.835A9.964 9.964 0 0 0 18.306.5a10.079 10.079 0 0 0-9.614 6.977 9.967 9.967 0 0 0-6.664 4.834 10.08 10.08 0 0 0 1.24 11.817 9.965 9.965 0 0 0 .856 8.185 10.079 10.079 0 0 0 10.855 4.835 9.965 9.965 0 0 0 7.516 3.35 10.078 10.078 0 0 0 9.617-6.981 9.967 9.967 0 0 0 6.663-4.834 10.079 10.079 0 0 0-1.243-11.813zM22.498 37.886a7.474 7.474 0 0 1-4.799-1.735c.061-.033.168-.091.237-.134l7.964-4.6a1.294 1.294 0 0 0 .655-1.134V19.054l3.366 1.944a.12.12 0 0 1 .066.092v9.299a7.505 7.505 0 0 1-7.49 7.496zM6.392 31.006a7.471 7.471 0 0 1-.894-5.023c.06.036.162.099.237.141l7.964 4.6a1.297 1.297 0 0 0 1.308 0l9.724-5.614v3.888a.12.12 0 0 1-.048.103l-8.051 4.649a7.504 7.504 0 0 1-10.24-2.744zM4.297 13.62A7.469 7.469 0 0 1 8.2 10.333c0 .068-.004.19-.004.274v9.201a1.294 1.294 0 0 0 .654 1.132l9.723 5.614-3.366 1.944a.12.12 0 0 1-.114.01L7.04 23.856a7.504 7.504 0 0 1-2.743-10.237zm27.658 6.437l-9.724-5.615 3.367-1.943a.121.121 0 0 1 .113-.01l8.052 4.648a7.498 7.498 0 0 1-1.158 13.528v-9.476a1.293 1.293 0 0 0-.65-1.132zm3.35-5.043c-.059-.037-.162-.099-.236-.141l-7.965-4.6a1.298 1.298 0 0 0-1.308 0l-9.723 5.614v-3.888a.12.12 0 0 1 .048-.103l8.05-4.645a7.497 7.497 0 0 1 11.135 7.763zm-21.063 6.929l-3.367-1.944a.12.12 0 0 1-.065-.092v-9.299a7.497 7.497 0 0 1 12.293-5.756 6.94 6.94 0 0 0-.236.134l-7.965 4.6a1.294 1.294 0 0 0-.654 1.132l-.006 11.225zm1.829-3.943l4.33-2.501 4.332 2.5v5l-4.331 2.5-4.331-2.5V18z" fill="currentColor"/></svg>
+                    <svg width="2500" height="2500" fill="none" xmlns="http://www.w3.org/2000/svg" strokeWidth="1.5" className="h-32 w-32 dark:text-zinc-50 text-zinc-900 group-hover:drop-shadow-md-primary group-hover:stroke-primary-blue stroke-1 group-hover:animate-fadeIn animate-fadeOut" viewBox="-0.17090198558635983 0.482230148717937 41.14235318283891 40.0339509076386"><text x="-9999" y="-9999">ChatGPT</text><path className="w-32 h-32" d="M37.532 16.87a9.963 9.963 0 0 0-.856-8.184 10.078 10.078 0 0 0-10.855-4.835A9.964 9.964 0 0 0 18.306.5a10.079 10.079 0 0 0-9.614 6.977 9.967 9.967 0 0 0-6.664 4.834 10.08 10.08 0 0 0 1.24 11.817 9.965 9.965 0 0 0 .856 8.185 10.079 10.079 0 0 0 10.855 4.835 9.965 9.965 0 0 0 7.516 3.35 10.078 10.078 0 0 0 9.617-6.981 9.967 9.967 0 0 0 6.663-4.834 10.079 10.079 0 0 0-1.243-11.813zM22.498 37.886a7.474 7.474 0 0 1-4.799-1.735c.061-.033.168-.091.237-.134l7.964-4.6a1.294 1.294 0 0 0 .655-1.134V19.054l3.366 1.944a.12.12 0 0 1 .066.092v9.299a7.505 7.505 0 0 1-7.49 7.496zM6.392 31.006a7.471 7.471 0 0 1-.894-5.023c.06.036.162.099.237.141l7.964 4.6a1.297 1.297 0 0 0 1.308 0l9.724-5.614v3.888a.12.12 0 0 1-.048.103l-8.051 4.649a7.504 7.504 0 0 1-10.24-2.744zM4.297 13.62A7.469 7.469 0 0 1 8.2 10.333c0 .068-.004.19-.004.274v9.201a1.294 1.294 0 0 0 .654 1.132l9.723 5.614-3.366 1.944a.12.12 0 0 1-.114.01L7.04 23.856a7.504 7.504 0 0 1-2.743-10.237zm27.658 6.437l-9.724-5.615 3.367-1.943a.121.121 0 0 1 .113-.01l8.052 4.648a7.498 7.498 0 0 1-1.158 13.528v-9.476a1.293 1.293 0 0 0-.65-1.132zm3.35-5.043c-.059-.037-.162-.099-.236-.141l-7.965-4.6a1.298 1.298 0 0 0-1.308 0l-9.723 5.614v-3.888a.12.12 0 0 1 .048-.103l8.05-4.645a7.497 7.497 0 0 1 11.135 7.763zm-21.063 6.929l-3.367-1.944a.12.12 0 0 1-.065-.092v-9.299a7.497 7.497 0 0 1 12.293-5.756 6.94 6.94 0 0 0-.236.134l-7.965 4.6a1.294 1.294 0 0 0-.654 1.132l-.006 11.225zm1.829-3.943l4.33-2.501 4.332 2.5v5l-4.331 2.5-4.331-2.5V18z" fill="currentColor"/></svg>
                   </div>
                 </div>
               </Block>
@@ -244,7 +243,7 @@ const PreorderForm = () => {
                         }}
                         transition={{ duration: 0.4, delay: 0.01 }}
                         initial="initial"
-                      animate={layoutControls}
+                        animate={layoutControls}
                         className="w-full h-11 mt-3 bg-zinc-900 rounded-md"></motion.div>
                     </div>
                   </div>
@@ -262,9 +261,49 @@ const PreorderForm = () => {
                   <Button className="w-36 h-17 font-bold text-xl cursor-blue dark:hover:shadow-lg-white dark:shadow-md-white hover:shadow-lg shadow-md">export</Button>
                 </div>
               </Block>
-              <Block className="col-span-7 row-span-3"/>
-              <Block className="col-span-3 row-span-3"/>
-              <Block className="col-span-2 row-span-2"/>
+              <Block className="col-span-7 row-span-3">
+                <div className="flex flex-col items-center justify-center min-h-full dark:text-zinc-50 font-semibold">
+                  <div>Desktop Mockup</div>
+                  <div>coming soon...</div>
+                </div>
+              </Block>
+              <Block className="col-span-3 row-span-3"> 
+                <div className="flex flex-col items-center justify-center min-h-full dark:text-zinc-50 font-semibold">
+                  <div>Mobile Mockup</div>
+                  <div>coming soon...</div>
+                </div>
+              </Block>
+              <Block className="col-span-2 row-span-2">
+                <div className="relative flex flex-col items-center justify-center min-h-full">
+                  <div className="absolute -translate-y-5 z-30">
+                    <motion.svg
+                      whileHover={{ x: 20 }}
+                      width="113" height="59" viewBox="0 0 113 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <motion.path
+                        whileHover={{ fill: 'blue' }}
+                        d="M51 2.43995L51.1012 2.38988C54.5332 0.692625 58.5577 0.680339 62 2.35661L111 26.8567C113.129 27.9211 113.129 30.959 111 32.0234L61 57.0236L60.9997 57.0237C58.2313 58.3929 54.9843 58.4 52.21 57.0429L52 56.9403L52 56.9402L2 31.94C-0.060118 30.91 -0.0601196 27.9701 2 26.94L51 2.43995Z" fill="black"/>
+                    </motion.svg>
+                  </div>
+                  <div className="absolute z-20">
+                    <motion.svg
+                      whileHover={{ x: 20 }}
+                      width="113" height="59" viewBox="0 0 113 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <motion.path
+                        whileHover={{ fill: 'blue' }}
+                        d="M51 2.43995L51.1012 2.38988C54.5332 0.692625 58.5577 0.680339 62 2.35661L111 26.8567C113.129 27.9211 113.129 30.959 111 32.0234L61 57.0236L60.9997 57.0237C58.2313 58.3929 54.9843 58.4 52.21 57.0429L52 56.9403L52 56.9402L2 31.94C-0.060118 30.91 -0.0601196 27.9701 2 26.94L51 2.43995Z" fill="black"/>
+                    </motion.svg>
+                  </div>
+                  <div className="absolute translate-y-5 z-10">
+                    <motion.svg
+                      whileHover={{ x: 20 }}
+                      width="113" height="59" viewBox="0 0 113 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <motion.path
+                        whileHover={{ fill: 'blue' }}
+                        d="M51 2.43995L51.1012 2.38988C54.5332 0.692625 58.5577 0.680339 62 2.35661L111 26.8567C113.129 27.9211 113.129 30.959 111 32.0234L61 57.0236L60.9997 57.0237C58.2313 58.3929 54.9843 58.4 52.21 57.0429L52 56.9403L52 56.9402L2 31.94C-0.060118 30.91 -0.0601196 27.9701 2 26.94L51 2.43995Z" fill="black"/>
+                    </motion.svg>
+                  </div>
+                </div>
+              </Block>
             </motion.div>
             </div>
           </section>

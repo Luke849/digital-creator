@@ -14,8 +14,8 @@ bento:
 3 - Customize
     Easily customize every page to align with your unique brand.
 
-4 - Multiple Pages
-    Effortlessly build and manage multi-page digital products or courses
+4 - Analytics
+    Gain insights with built-in analytics to track user engagement and performance.
 
 5 - Export
     Export your digital products to Notion or as HTML, CSS, and JS files.
