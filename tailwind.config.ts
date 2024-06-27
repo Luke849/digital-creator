@@ -27,6 +27,7 @@ const config = {
       dropShadow: {
         "sm-primary": "0 0 2px #0047FF",
         "md-primary": "0 0 4px #0047FF",
+        "lg-primary": "0 0 5px #0047FF",
       },
       boxShadow: {
         "md-white": '0 4px 6px -1px rgb(255 255 255 / 0.1), 0 2px 4px -2px rgb(255 255 255 / 0.1)',
