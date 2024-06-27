@@ -13,11 +13,14 @@ const PreorderForm = () => {
   const [userEmail, setUserEmail] = useState("");
   const [isTop, setIsTop] = useState(true);
   const [isLayoutHover, setIsLayoutHover] = useState(false);
+  const [isCustomHover, setIsCustomHover] = useState(false);
   const ref = useRef(null);
   const layoutRef = useRef<HTMLDivElement>(null);
+  const customRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true })
   const mainControls = useAnimation();
   const layoutControls = useAnimation();
+  const customControls = useAnimation();
 
   useEffect(() => {
     const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -66,6 +69,31 @@ const PreorderForm = () => {
       layoutControls.start("initial");
     }
   }, [isLayoutHover, layoutControls]);
+
+  useEffect(() => {
+    const handleMouseEnter = () => setIsCustomHover(true);
+    const handleMouseLeave = () => setIsCustomHover(false);
+
+    const custom = customRef.current;
+    if (custom) {
+      custom.addEventListener('mouseenter', handleMouseEnter);
+      custom.addEventListener('mouseleave', handleMouseLeave);
+    }
+    return () => {
+      if (custom) {
+        custom.removeEventListener('mouseenter', handleMouseEnter);
+        custom.removeEventListener('mouseleave', handleMouseLeave);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isCustomHover) {
+      customControls.start("animate");
+    } else {
+      customControls.start("initial");
+    }
+  }, [isCustomHover, customControls]);
 
   const postEmailToApi = async () => {
     try{
@@ -177,7 +205,7 @@ const PreorderForm = () => {
               staggerChildren: 0.1
             }}
             className="mx-20 pt-20 grid grid-cols-12 grid-rows-4 gap-4 text-center lg:h-[80vh] my-10 backdrop-blur-sm">
-              <Block className="col-span-3 group">
+              <Block className="col-span-4 group">
                 <div className="flex justify-between items-center h-full">
                   <div className="w-[50%] text-sm text-left">
                     <h2 className="text-xl font-bold dark:text-zinc-50">Website Copy</h2>
@@ -190,7 +218,7 @@ const PreorderForm = () => {
                   </div>
                 </div>
               </Block>
-              <Block className="col-span-4">
+              <Block className="col-span-5">
                 <div className="flex justify-between items-center h-full" ref={layoutRef}>
                   <div className="w-[30%] text-sm text-left">
                     <h2 className="text-xl font-bold dark:text-zinc-50">Layout</h2>
@@ -249,7 +277,44 @@ const PreorderForm = () => {
                   </div>
                 </div>
               </Block>
-              <Block className="col-span-2 row-span-2"/>
+              <Block className="col-span-3 row-span-3"> 
+                <div className="flex flex-col items-center justify-center min-h-full dark:text-zinc-50 font-semibold">
+                  <div>Mobile Mockup</div>
+                  <div>coming soon...</div>
+                </div>
+              </Block>
+              <Block className="col-span-7 row-span-3">
+                <div className="flex flex-col items-center justify-center min-h-full dark:text-zinc-50 font-semibold">
+                  <div>Desktop Mockup</div>
+                  <div>coming soon...</div>
+                </div>
+              </Block>
+              <Block className="col-span-2 row-span-3 p-0">
+                <div className="w-full h-full" ref={customRef}>
+                  <div className="text-sm text-left w-44 p-6">
+                  <h2 className="text-xl font-bold dark:text-zinc-50">Customize</h2>
+                  <p className="text-zinc-500">
+                    <span className="dark:text-primary-blue text-primary-blue font-semibold">You</span> can easily customize every page to align with your unique brand.
+                  </p>
+                </div>
+                <div className="mt-[3vh] p-0 h-96">
+                  <div className="relative flex items-center justify-center w-full bg-transparent">
+                    <motion.div
+                    variants={{
+                      "initial": { width: '33%', height: '10vh'},
+                      "animate": { width: '50%', height: '30vh'}
+                    }}
+                     animate={customControls}
+                    className="absolute w-1/3 h-[10vh] border border-dashed border-zinc-950 dark:border-zinc-50 top-0 left-6">
+                    </motion.div>
+                    <motion.div className="absolute left-[46%] top-[10vh]">
+                      <img src="cursor.png" alt="cursor" className="bg-transparent"/>
+                    </motion.div>
+                  </div>
+                </div>
+                </div>
+                
+              </Block>
               <Block className="col-span-3 cursor-blue">
                 <div className="text-sm text-left w-44">
                       <h2 className="text-xl font-bold dark:text-zinc-50">Export</h2>
@@ -259,49 +324,6 @@ const PreorderForm = () => {
                 </div>
                 <div className="absolute min-full bottom-8 left-1/2 -translate-x-1/2">
                   <Button className="w-36 h-17 font-bold text-xl cursor-blue dark:hover:shadow-lg-white dark:shadow-md-white hover:shadow-lg shadow-md">export</Button>
-                </div>
-              </Block>
-              <Block className="col-span-7 row-span-3">
-                <div className="flex flex-col items-center justify-center min-h-full dark:text-zinc-50 font-semibold">
-                  <div>Desktop Mockup</div>
-                  <div>coming soon...</div>
-                </div>
-              </Block>
-              <Block className="col-span-3 row-span-3"> 
-                <div className="flex flex-col items-center justify-center min-h-full dark:text-zinc-50 font-semibold">
-                  <div>Mobile Mockup</div>
-                  <div>coming soon...</div>
-                </div>
-              </Block>
-              <Block className="col-span-2 row-span-2">
-                <div className="relative flex flex-col items-center justify-center min-h-full">
-                  <div className="absolute -translate-y-5 z-30">
-                    <motion.svg
-                      whileHover={{ x: 20 }}
-                      width="113" height="59" viewBox="0 0 113 59" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <motion.path
-                        whileHover={{ fill: 'blue' }}
-                        d="M51 2.43995L51.1012 2.38988C54.5332 0.692625 58.5577 0.680339 62 2.35661L111 26.8567C113.129 27.9211 113.129 30.959 111 32.0234L61 57.0236L60.9997 57.0237C58.2313 58.3929 54.9843 58.4 52.21 57.0429L52 56.9403L52 56.9402L2 31.94C-0.060118 30.91 -0.0601196 27.9701 2 26.94L51 2.43995Z" fill="black"/>
-                    </motion.svg>
-                  </div>
-                  <div className="absolute z-20">
-                    <motion.svg
-                      whileHover={{ x: 20 }}
-                      width="113" height="59" viewBox="0 0 113 59" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <motion.path
-                        whileHover={{ fill: 'blue' }}
-                        d="M51 2.43995L51.1012 2.38988C54.5332 0.692625 58.5577 0.680339 62 2.35661L111 26.8567C113.129 27.9211 113.129 30.959 111 32.0234L61 57.0236L60.9997 57.0237C58.2313 58.3929 54.9843 58.4 52.21 57.0429L52 56.9403L52 56.9402L2 31.94C-0.060118 30.91 -0.0601196 27.9701 2 26.94L51 2.43995Z" fill="black"/>
-                    </motion.svg>
-                  </div>
-                  <div className="absolute translate-y-5 z-10">
-                    <motion.svg
-                      whileHover={{ x: 20 }}
-                      width="113" height="59" viewBox="0 0 113 59" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <motion.path
-                        whileHover={{ fill: 'blue' }}
-                        d="M51 2.43995L51.1012 2.38988C54.5332 0.692625 58.5577 0.680339 62 2.35661L111 26.8567C113.129 27.9211 113.129 30.959 111 32.0234L61 57.0236L60.9997 57.0237C58.2313 58.3929 54.9843 58.4 52.21 57.0429L52 56.9403L52 56.9402L2 31.94C-0.060118 30.91 -0.0601196 27.9701 2 26.94L51 2.43995Z" fill="black"/>
-                    </motion.svg>
-                  </div>
                 </div>
               </Block>
             </motion.div>
