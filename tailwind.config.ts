@@ -42,6 +42,11 @@ const config = {
           '0%': { opacity: '1' },
           '100%': { opacity: '0' },
         },
+        "flicker": {
+          '0%': { opacity: '1' },
+          '50%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
         "slideInFromTop": {
           '0%': { transform: 'translateY(-100%)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
@@ -62,6 +67,7 @@ const config = {
       animation: {
         "fadeIn": 'fadeIn 1s ease-in-out',
         "fadeOut": 'fadeOut 300ms ease-in-out',
+        "flicker": 'flicker 300ms ease-in-out infinite',
         "slideInFromTop": 'slideInFromTop 1s ease-in-out',
         "slideInFromBottom": 'slideInFromBottom 1s ease-in-out',
         "accordion-down": "accordion-down 0.2s ease-out",
