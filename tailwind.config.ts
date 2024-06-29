@@ -18,6 +18,10 @@ const config = {
       },
     },
     extend: {
+      transitionDuration: {
+        '1500': '1500ms',
+        '2000': '2000ms',
+      },
       cursor: {
         'blue': 'url(cursor.png), auto',
       },
@@ -27,7 +31,7 @@ const config = {
       dropShadow: {
         "sm-primary": "0 0 2px #0047FF",
         "md-primary": "0 0 4px #0047FF",
-        "lg-primary": "0 0 5px #0047FF",
+        "md-white": "0 0 4px #FFFFFF",
       },
       boxShadow: {
         "md-white": '0 4px 6px -1px rgb(255 255 255 / 0.1), 0 2px 4px -2px rgb(255 255 255 / 0.1)',
@@ -42,6 +46,14 @@ const config = {
         "fadeOut": {
           '0%': { opacity: '1' },
           '100%': { opacity: '0' },
+        },
+        "customization-sm": {
+          '0%, 60%, 100%': { width: '33%', height: '10vh' },
+          '25%,35%': {  width: '50%', height: '15vh' },
+        },
+        "customization-md": {
+          '0%': { width: '33%', height: '10vh' },
+          '100%': { width: '50%', height: '30vh' },
         },
         "flicker": {
           '0%': { opacity: '1' },
@@ -68,6 +80,8 @@ const config = {
       animation: {
         "fadeIn": 'fadeIn 1s ease-in-out',
         "fadeOut": 'fadeOut 300ms ease-in-out',
+        "customization-sm": 'customization-sm 6s ease-in-out infinite',
+        "customization-md": 'customization-md 1000ms ease-in-out',
         "flicker": 'flicker 300ms ease-in-out infinite',
         "slideInFromTop": 'slideInFromTop 1s ease-in-out',
         "slideInFromBottom": 'slideInFromBottom 1s ease-in-out',
